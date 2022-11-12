@@ -3,8 +3,8 @@
 
 import logging
 import os
-import DJConnection
-from DJObjects import DJFinding
+from djconnection import DJConnection
+from djconnection.DJObjects import DJFinding
 
 
 def test_finding_creation():

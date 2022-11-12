@@ -4,7 +4,7 @@ from pprint import pprint
 import logging
 import datetime
 import time
-from DJObjects import DJFinding
+from djconnection.DJObjects import DJFinding
 
 class Client:
     def __init__(self, API_ENDPOINT, API_KEY):
