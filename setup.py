@@ -5,7 +5,7 @@
 """
 
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 NAME = "djconnection"
 VERSION = "0.0.1"
@@ -26,6 +26,7 @@ setup(
     author_email="sandermaas@gmail.com",
     url="https://github.com/Retrospected/djconnection",
     keywords=["Defect Dojo API Implementation"],
+    packages=find_packages(exclude=["test"]),
     install_requires=REQUIRES,
     include_package_data=True,
     long_description="""\
