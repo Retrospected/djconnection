@@ -23,7 +23,6 @@ setup(
     version=VERSION,
     description="Defect Dojo API Implementation",
     author="Retrospected",
-    author_email="sandermaas@gmail.com",
     url="https://github.com/Retrospected/djconnection",
     keywords=["Defect Dojo API Implementation"],
     packages=find_packages(exclude=["test"]),
