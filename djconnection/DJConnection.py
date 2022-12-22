@@ -9,7 +9,7 @@ from djconnection.DJObjects import DJFinding
 class Client:
     def __init__(self, API_ENDPOINT, API_KEY):
 
-        self.product_name = "MAC"
+        self.product_name = "CAM"
         self.product_description = "Testing this"
         self.dj_user_id = 1 # user ID (user of which the API key belongs to)
         self.limit = 1000000
