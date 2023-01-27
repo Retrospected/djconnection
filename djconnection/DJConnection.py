@@ -57,7 +57,7 @@ class Client:
             description=finding.description, 
             impact=finding.impact,
             active=True,
-            verified=False,
+            verified=finding.verified,
             numerical_severity=numerical_severity)
             
             api_response = api_instance.findings_create(finding)

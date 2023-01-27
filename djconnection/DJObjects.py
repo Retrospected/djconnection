@@ -1,7 +1,7 @@
 import logging
 
 class DJFinding():
-    def __init__(self, title = None, description = None, impact = None, mitigation = None, severity = None):
+    def __init__(self, title = None, description = None, impact = None, mitigation = None, severity = None, verified = False):
 
         self.logger = logging.getLogger("DJFinding")
 
@@ -21,3 +21,4 @@ class DJFinding():
         self.description = description
         self.severity = severity
         self.mitigation = mitigation
+        self.verified = verified
