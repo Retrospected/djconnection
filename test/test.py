@@ -13,7 +13,7 @@ def test_finding_creation():
 
     logger = logging.getLogger("MAIN")
     logging.basicConfig(format='%(name)-11s | %(asctime)s - %(levelname)-5s - %(message)s', level=logging.DEBUG)
-    logger.info("DJConnection v0.1")
+
 
     # TEST DATA
 
@@ -30,20 +30,22 @@ def test_finding_creation():
         mitigation="If this TGS is crackable:\n- rotate password")
     ]
 
-    # TEST RUN 1 - TestTool_multiple
+    test_findings = []
+
+    # TEST RUN 1 - TestTool unverified issues
 
     djclient = DJConnection.Client(os.environ['API_ENDPOINT'], os.environ['API_KEY'])
 
-    tool = "TestTool_multiple"
-
-    djclient.create_findings(tool, findings)
-
-    # TEST RUN 2 - TestTool_individual
+    logger.info(f"DJConnection {djclient.__version__} - Test Script")
 
     tool = "TestTool_individual"
 
     for finding in findings:
-        djclient.create_finding(tool, finding)
+        findingId = djclient.create_finding(tool, finding).id
+        logger.info(f"Created finding with ID: {str(findingId)}")
+        test_findings.append(findingId)
+
+    # TEST RUN 2 - TestTool verified issues
 
     tool = "TestTool_verified"
 
@@ -56,7 +58,19 @@ def test_finding_creation():
         verified=True)
     ]
 
-    djclient.create_findings(tool, findings)
+    for finding in findings:
+        findingId = djclient.create_finding(tool, finding).id
+        logger.info(f"Created finding with ID: {str(findingId)}")
+        test_findings.append(findingId)
+
+    # Testing retrieval of previously added findings based on their ID's
+
+    for findingId in test_findings:
+        finding = djclient.get_finding(findingId)
+        logger.info(f"Succesfully retrieved finding with:")
+        logger.info(f"ID: {finding.id}")
+        logger.info(f"TITLE: {finding.title}")
+    
 
 if __name__ == "__main__":
 
