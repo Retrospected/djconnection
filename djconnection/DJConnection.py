@@ -8,6 +8,7 @@ from djconnection.DJObjects import DJFinding
 
 class Client:
     def __init__(self, API_ENDPOINT, API_KEY):
+        self.__version__ = "0.0.3"
 
         self.product_name = "CAM"
         self.product_description = "Testing this"
@@ -25,10 +26,14 @@ class Client:
         # Defining host is optional and default to http://localhost:8080/api/v2
         self.configuration.host = API_ENDPOINT
 
-    def create_findings(self, tool, findings):
-        test_id = self.get_test(tool)
-        for finding in findings:
-            self.create_finding(tool, finding, test_id)
+    def get_finding(self, finding_id):
+        self.logger.info(f"Getting finding with ID: {finding_id}")
+
+        try:
+            api_instance = djclient.FindingsApi(djclient.ApiClient(self.configuration))
+            return api_instance.findings_read(finding_id)
+        except ApiException as e:
+            self.logger.error("Exception when calling FindingsApi->findings_read: %s\n" % e)
 
     def create_finding(self, tool, finding, test_id = None):
         self.logger.info(f"Creating finding for tool: {tool}")
@@ -60,7 +65,7 @@ class Client:
             verified=finding.verified,
             numerical_severity=numerical_severity)
             
-            api_response = api_instance.findings_create(finding)
+            return api_instance.findings_create(finding)
         except ApiException as e:
             self.logger.error("Exception when calling FindingsApi->findings_create: %s\n" % e)
 
