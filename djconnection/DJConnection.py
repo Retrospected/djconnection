@@ -29,8 +29,8 @@ class Client:
     def get_finding(self, finding_id):
         self.logger.info(f"Getting finding with ID: {finding_id}")
 
-        try:
-            api_instance = djclient.FindingsApi(djclient.ApiClient(self.configuration))
+        api_instance = djclient.FindingsApi(djclient.ApiClient(self.configuration))
+        try:            
             return api_instance.findings_read(finding_id)
         except ApiException as e:
             self.logger.error("Exception when calling FindingsApi->findings_read: %s\n" % e)
